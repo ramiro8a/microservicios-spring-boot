@@ -1,0 +1,28 @@
+server:
+  port: 8024
+spring:
+  application:
+    name: notif-manager
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: mensaje-group
+      auto-offset-reset: latest #earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            type:
+              mapping: event:com.notif.domain.service.event.ClienteEvent
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: corero@gmail.com
+    password: 'appId'
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true

@@ -1,0 +1,22 @@
+server:
+  port: 8021
+spring:
+  application:
+    name: config-manager
+  datasource:
+    hikari:
+      connection-timeout: 5000
+      maximum-pool-size: 2
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/config-manager
+    username: postgres
+    password: h4ckm3
+  cloud:
+    config:
+      server:
+        jdbc:
+          sql: SELECT PROPERTIES.PROP_KEY, PROPERTIES.PROP_VALUE from PROPERTIES where APPLICATION=? and PROFILE=? and LABEL=?
+  profiles:
+    include: jdbc
+encrypt:
+  key: llave

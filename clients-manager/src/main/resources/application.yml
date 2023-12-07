@@ -1,0 +1,43 @@
+server:
+  port: 8022
+spring:
+  application:
+    name: clients-manager
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+  profiles:
+    active: dev
+  cloud:
+    config:
+      label: master
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URL:http://localhost:8021}
+  kafka:
+    producer:
+      bootstrap-servers: ${KAFKA_SERVER_URL:localhost:9092}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring:
+          json:
+            type:
+              mapping: event:com.clients.domain.service.event.ClienteEvent
+---
+management:
+  endpoints.web.exposure.include:
+    - '*'
+  endpoint.health.show-details: always
+  health.circuitbreakers.enabled: true
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      minimumNumberOfCalls: 5
+      permittedNumberOfCallsInHalfOpenState: 3
+      automaticTransitionFromOpenToHalfOpenEnabled: true

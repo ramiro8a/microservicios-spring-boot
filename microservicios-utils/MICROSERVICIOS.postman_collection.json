@@ -1,0 +1,459 @@
+{
+	"info": {
+		"_postman_id": "a0116b22-b6f4-4cf4-ab51-af44a88bd4b2",
+		"name": "MICROSERVICIOS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10776655"
+	},
+	"item": [
+		{
+			"name": "CREA",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenOauht2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"moneda\": \"USD\",\r\n    \"usuarioId\": 2000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8020/cuenta",
+					"host": [
+						"localhost"
+					],
+					"port": "8020",
+					"path": [
+						"cuenta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BuscarTodo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8020/cuenta",
+					"host": [
+						"localhost"
+					],
+					"port": "8020",
+					"path": [
+						"cuenta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8021/config",
+					"host": [
+						"localhost"
+					],
+					"port": "8021",
+					"path": [
+						"config"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RESFRESH-properties",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenOauht2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8022/actuator/refresh",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8022",
+					"path": [
+						"actuator",
+						"refresh"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREA CLIENTE CUENTA",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenOauht2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombres\":\"Ramiro\",\r\n    \"correo\":\"oaramiro@gmail.com\",\r\n    \"moneda\":\"USD\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8022/cliente",
+					"host": [
+						"localhost"
+					],
+					"port": "8022",
+					"path": [
+						"cliente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OAUTH2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"tokenOauht2\", jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "app1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "app1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8023/oauth2/token?grant_type=client_credentials",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8023",
+					"path": [
+						"oauth2",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OAUTH2-cliente Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"tokenOauht2\", jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "app1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "app1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8023/oauth2/token?grant_type=client_credentials",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8023",
+					"path": [
+						"oauth2",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE CLIENT-auth",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"clientId\": \"app1\",\r\n    \"clientSecret\": \"app1\",\r\n    \"clientAuthenticationMethods\":[\"client_secret_basic\"],\r\n    \"authorizationGrantTypes\": [\"client_credentials\"],\r\n    \"scopes\": [\r\n        \"CREA_CLIENTE\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8023/client/create",
+					"host": [
+						"localhost"
+					],
+					"port": "8023",
+					"path": [
+						"client",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mensaje KAFKA",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenOauht2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8022/kafka/saludo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8022",
+					"path": [
+						"kafka",
+						"saludo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GATEWAY M-CLIENTE",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenOauht2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8025/mensaje/desde el apigatewat",
+					"host": [
+						"localhost"
+					],
+					"port": "8025",
+					"path": [
+						"mensaje",
+						"desde el apigatewat"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GATEWAY CREA-CLIENTE",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenOauht2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombres\":\"Tux1\",\r\n    \"correo\":\"tux1@gmail.com\",\r\n    \"moneda\":\"USD\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8025/crea-cliente",
+					"host": [
+						"localhost"
+					],
+					"port": "8025",
+					"path": [
+						"crea-cliente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GATEWAY M-CUENTA",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenOauht2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8025/cuenta/mensaje/segunda prueba",
+					"host": [
+						"localhost"
+					],
+					"port": "8025",
+					"path": [
+						"cuenta",
+						"mensaje",
+						"segunda prueba"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "M.CLIENTE",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenOauht2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8022/mensaje/dese el cliente",
+					"host": [
+						"localhost"
+					],
+					"port": "8022",
+					"path": [
+						"mensaje",
+						"dese el cliente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HEALTH CHECK",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8022/actuator/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8022",
+					"path": [
+						"actuator",
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

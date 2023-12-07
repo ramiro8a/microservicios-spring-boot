@@ -1,0 +1,21 @@
+server:
+  port: 8025
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: cliente-mensaje
+          uri: http://localhost:8022
+          predicates:
+            - Path=/mensaje/**
+          filters:
+            - AddRequestHeader=X-Powered-By, SpringGatewayForClient
+            - AddResponseHeader=X-response, 1234
+        - id: cuenta-mensaje
+          uri: http://localhost:8020
+          predicates:
+            - Path=/cuenta/mensaje/**
+          filters:
+            - RewritePath=/cuenta/mensaje/(?<segment>.*), /account/message/${segment}
+            - AddRequestHeader=X-Powered-By, SpringGatewayForAccount
+            - AddResponseHeader=X-response, 1234
